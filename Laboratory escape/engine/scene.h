@@ -2,8 +2,10 @@
 
 #include <string>
 #include "types.h"
+#include "state.h"
 
-class Scene
+
+class Scene : public State
 {
 private:
 	SceneId id;
@@ -16,8 +18,12 @@ public:
 
 	
 protected:
-	virtual void Load() = 0;
-	virtual void Unload() = 0;
+	void Start();
+	void Pause();
+	void Resume();
+	void Stop();
+
+	void Update();
 
 
 	friend class SceneManager;
