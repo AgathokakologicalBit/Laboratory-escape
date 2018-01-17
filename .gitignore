@@ -1,9 +1,10 @@
 # Visual studio
 .vs
-packages
+packages*
 Debug
 Release
+*.sln
+*.*proj*
 
 # Other
 *.~*
-
