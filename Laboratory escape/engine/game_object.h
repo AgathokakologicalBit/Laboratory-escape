@@ -1,8 +1,10 @@
 #pragma once
 
 #include <vector>
+
 #include "component.h"
 #include "types.h"
+#include "transform.h"
 
 
 class GameObject final
@@ -17,9 +19,11 @@ public:
 	std::string name;
 	Layer layer;
 
+	Transform transform;
+
 
 public:
-	GameObject() = default;
+	GameObject();
 	~GameObject() = default;
 
 
