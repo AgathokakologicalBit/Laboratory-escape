@@ -1,3 +1,9 @@
+# Visual studio
+.vs
 packages
 Debug
 Release
+
+# Other
+*.~*
+
