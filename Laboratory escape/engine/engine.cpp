@@ -1,7 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "engine.h"
 
-
 Engine::Engine()
 	: window(sf::VideoMode(640, 480), "Laboratory escape")
 {
@@ -13,9 +12,6 @@ Engine::Engine()
 int Engine::Start()
 {
 	time.clock.restart();
-
-	// scene_manager.Load([DefaultSceneGoesHere], SceneManager::StatePushMode::APPEND);
-
 	return EXIT_SUCCESS;
 }
 
@@ -36,9 +32,8 @@ bool Engine::Update()
 		}
 	}
 
-	scene_manager.Update();
-
 	window.clear();
+	scene_manager.Update();
 	window.display();
 
 	return true;

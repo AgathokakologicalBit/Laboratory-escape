@@ -13,8 +13,5 @@ public:
 
 
 public:
-	template <typename SceneType>
-	void Load(SceneType * scene, StatePushMode mode) { Push(scene, mode); }
-
-	void Update() { StateMachine<Scene>::Update(); };
+	void Load(Scene * scene, StatePushMode mode) { Push(scene, mode); }
 };

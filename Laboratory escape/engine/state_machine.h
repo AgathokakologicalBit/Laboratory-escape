@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <stack>
 #include <type_traits>
 #include "state.h"
@@ -23,7 +24,13 @@ private:
 
 
 public:
-	void Push(StateType * state, StatePushMode mode);
+	void Push(StateType * state, StatePushMode mode)
+	{
+		assert(awaiting_push_mode == StatePushMode::IGNORE);
+		awaiting_state = state;
+		awaiting_push_mode = mode;
+	}
+
 	void Pop();
 	StateType * Top() const { return states.empty() ? nullptr : states.top(); }
 
@@ -46,5 +53,8 @@ public:
 
 		states.push(awaiting_state);
 		states.top()->Start();
+
+		awaiting_push_mode = IGNORE;
+		awaiting_state = nullptr;
 	}
 };

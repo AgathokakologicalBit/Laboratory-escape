@@ -6,7 +6,7 @@
 
 class Engine
 {
-private:
+public:
 	sf::RenderWindow window;
 
 	Time time;

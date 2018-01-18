@@ -18,10 +18,10 @@ public:
 
 	
 public:
-	void Start();
-	void Pause();
-	void Resume();
-	void Stop();
+	virtual void Start() {};
+	virtual void Pause() {};
+	virtual void Resume() {};
+	virtual void Stop() {};
 
-	void Update();
+	virtual void Update() {};
 };
