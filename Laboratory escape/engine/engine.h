@@ -1,6 +1,7 @@
 #pragma once
 
 #include "time.h"
+#include "scene_manager.h"
 
 
 class Engine
@@ -9,6 +10,7 @@ private:
 	sf::RenderWindow window;
 
 	Time time;
+	SceneManager scene_manager;
 
 
 public:

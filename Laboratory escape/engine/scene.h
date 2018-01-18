@@ -17,14 +17,11 @@ public:
 	~Scene() = default;
 
 	
-protected:
+public:
 	void Start();
 	void Pause();
 	void Resume();
 	void Stop();
 
 	void Update();
-
-
-	friend class SceneManager;
 };

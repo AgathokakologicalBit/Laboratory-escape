@@ -13,12 +13,15 @@ Engine::Engine()
 int Engine::Start()
 {
 	time.clock.restart();
+
+	// scene_manager.Load([DefaultSceneGoesHere], SceneManager::StatePushMode::APPEND);
+
 	return EXIT_SUCCESS;
 }
 
 bool Engine::Update()
 {
-	if (!window.isOpen())
+	if (!window.isOpen() || scene_manager.Empty())
 		return false;
 
 	time.delta = time.clock.restart().asSeconds();
@@ -32,6 +35,8 @@ bool Engine::Update()
 			return false;
 		}
 	}
+
+	scene_manager.Update();
 
 	window.clear();
 	window.display();
