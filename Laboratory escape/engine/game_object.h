@@ -10,7 +10,7 @@
 class GameObject final
 {
 private:
-	using ComponentArrayType = std::vector<Component>();
+	using ComponentArrayType = std::vector<Component *>;
 
 private:
 	ComponentArrayType _components;

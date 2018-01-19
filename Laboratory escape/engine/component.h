@@ -16,6 +16,13 @@ public:
 	Component() = default;
 	~Component() = default;
 
+
+public:
+	virtual void Awake() = 0;
+	virtual void Start() = 0;
+	virtual void Update() = 0;
+	virtual void Finish() = 0;
+
 	friend class GameObject;
 };
 
