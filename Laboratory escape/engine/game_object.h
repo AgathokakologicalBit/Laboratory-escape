@@ -14,6 +14,7 @@ private:
 
 private:
 	ComponentArrayType _components;
+	bool is_initialized = false;
 
 public:
 	std::string name;
@@ -40,4 +41,6 @@ public:
 
 	template <typename ComponentType>
 	void AddComponent();
+
+	friend class Scene;
 };

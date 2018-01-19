@@ -5,6 +5,9 @@
 
 class Component
 {
+private:
+	bool is_initialized = false;
+
 public:
 	std::string name;
 
@@ -12,5 +15,7 @@ public:
 public:
 	Component() = default;
 	~Component() = default;
+
+	friend class GameObject;
 };
 
