@@ -10,5 +10,4 @@ private:
 
 public:
 	void Start();
-	void Update();
 };

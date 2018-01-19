@@ -24,3 +24,15 @@ void GameObject::Finish()
 	for (auto c : _components)
 		c->Finish();
 }
+
+bool GameObject::AddComponent(Component * component)
+{
+	if (!component) return false;
+	
+	_components.push_back(component);
+
+	component->object = this;
+	component->Awake();
+
+	return true;
+}

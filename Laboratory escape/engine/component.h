@@ -2,11 +2,15 @@
 
 #include <string>
 
+class GameObject;
 
 class Component
 {
 private:
 	bool is_initialized = false;
+
+protected:
+	GameObject * object;
 
 public:
 	std::string name;

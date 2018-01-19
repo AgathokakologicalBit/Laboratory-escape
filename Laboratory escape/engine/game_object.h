@@ -39,8 +39,8 @@ public:
 	ComponentType * GetComponent() const;
 	Component * GetComponent(std::string name) const;
 
-	template <typename ComponentType>
-	void AddComponent();
+	bool AddComponent(Component * component);
+
 
 	friend class Scene;
 };
