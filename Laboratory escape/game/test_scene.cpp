@@ -12,6 +12,7 @@ void TestScene::Start()
 
 void TestScene::Update()
 {
+	Scene::Update();
 	auto delta = Engine::Get().time.Delta();
 
 	sprite.setPosition(sprite.getPosition() + sf::Vector2f(delta * 50, delta * 25));
