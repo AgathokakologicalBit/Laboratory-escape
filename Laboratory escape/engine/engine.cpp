@@ -2,11 +2,10 @@
 #include "engine.h"
 
 Engine::Engine()
-	: window(sf::VideoMode(640, 480), "Laboratory escape")
-{
-	window.setFramerateLimit(30);
-	window.setVerticalSyncEnabled(true);
-}
+	: time()
+	, scene_manager()
+	, rendering_engine("Laboratory escape")
+{ }
 
 
 int Engine::Start()
@@ -17,24 +16,23 @@ int Engine::Start()
 
 bool Engine::Update()
 {
-	if (!window.isOpen() || scene_manager.Empty())
+	if (!rendering_engine.window.isOpen() || scene_manager.Empty())
 		return false;
 
-	time.delta = time.clock.restart().asSeconds();
-
 	sf::Event event;
-	while (window.pollEvent(event))
+	while (rendering_engine.window.pollEvent(event))
 	{
 		if (event.type == sf::Event::Closed)
 		{
-			window.close();
+			rendering_engine.window.close();
 			return false;
 		}
 	}
 
-	window.clear();
+	time.delta = time.clock.restart().asSeconds();
+
 	scene_manager.Update();
-	window.display();
+	rendering_engine.Update();
 
 	return true;
 }

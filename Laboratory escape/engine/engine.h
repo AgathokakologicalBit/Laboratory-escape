@@ -2,15 +2,15 @@
 
 #include "time.h"
 #include "scene_manager.h"
+#include "rendering_engine.h"
 
 
 class Engine
 {
 public:
-	sf::RenderWindow window;
-
 	Time time;
 	SceneManager scene_manager;
+	RenderingEngine rendering_engine;
 
 
 public:

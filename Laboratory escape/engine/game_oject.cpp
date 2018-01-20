@@ -1,7 +1,9 @@
 #include "game_object.h"
 
 GameObject::GameObject()
-	: transform(*this)
+	: name()
+	, layer(0)
+	, transform(*this)
 { }
 
 void GameObject::Awake() {}

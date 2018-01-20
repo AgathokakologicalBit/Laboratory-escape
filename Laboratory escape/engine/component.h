@@ -10,7 +10,7 @@ private:
 	bool is_initialized = false;
 
 protected:
-	GameObject * object;
+	GameObject * object = nullptr;
 
 public:
 	std::string name;
@@ -29,4 +29,3 @@ public:
 
 	friend class GameObject;
 };
-
