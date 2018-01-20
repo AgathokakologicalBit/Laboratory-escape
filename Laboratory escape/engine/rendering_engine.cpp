@@ -14,15 +14,16 @@ void RenderingEngine::Update()
 
 	while (!actions.empty())
 	{
-		auto & act = actions.top();
+		auto const & act = actions.top();
 		switch (act.type)
 		{
 		case RenderAction::Type::DrawTexture:
 			sprite.setTexture(*act.draw_data.texture);
+			
 			sprite.setPosition(act.position);
 			sprite.setScale(act.scale);
+			sprite.setRotation(act.rotation);
 
-			// TODO: set right rotation
 			window.draw(sprite);
 			break;
 		}

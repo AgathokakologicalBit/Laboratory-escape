@@ -17,7 +17,7 @@ private:
 	int layer;
 
 	sf::Vector2f position;
-	sf::Vector2f rotation;
+	float rotation;
 	sf::Vector2f scale;
 
 	union

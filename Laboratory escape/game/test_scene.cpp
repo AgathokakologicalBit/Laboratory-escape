@@ -1,17 +1,12 @@
-#include "../engine/scene.h"
-#include "../engine/engine.h"
-#include "../engine/behavior.h"
 #include "test_scene.h"
+#include "../engine/engine.h"
+#include "../engine/components/renderer.h"
 
 
 class PlayerComponent final : public Behavior
 {
-	sf::Texture texture;
-
 	void Awake() final override
 	{
-		texture = sf::Texture();
-		texture.loadFromFile("player.png");
 		object->transform.scale = sf::Vector2f(4, 4);
 	}
 
@@ -19,10 +14,7 @@ class PlayerComponent final : public Behavior
 	void Finish() final override { }
 
 	void Update() final override {
-		auto delta = Engine::Get().time.Delta();
-		object->transform.position += sf::Vector2f(delta * 50, delta * 25);
-
-		Engine::Get().rendering_engine.Push(RenderAction(0, object->transform, &texture));
+		object->transform.position += sf::Vector2f(50,  25) * Engine::Get().time.Delta();
 	}
 };
 
@@ -31,6 +23,7 @@ void TestScene::Start()
 {
 	auto obj = new GameObject();
 	obj->AddComponent(new PlayerComponent);
+	obj->AddComponent(new Renderer("player"));
 
 	objects.push_back(obj);
 }
