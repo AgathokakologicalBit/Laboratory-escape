@@ -18,7 +18,7 @@ void RenderingEngine::Update()
 		switch (act.type)
 		{
 		case RenderAction::Type::DrawTexture:
-			sprite.setTexture(*act.draw_data.texture);
+			sprite.setTexture(*act.draw_data.texture, true);
 			
 			sprite.setPosition(act.position);
 			sprite.setScale(act.scale);

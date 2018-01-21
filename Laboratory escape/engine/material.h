@@ -21,6 +21,11 @@ public:
 		, tint(0xFFFFFFFF)
 		, texture(AssetsManager::Get().LoadTexture(texture_name))
 	{ }
+	Material(std::string tilemap_name, std::string texture_name)
+		: name(tilemap_name + '/' + texture_name)
+		, tint(0xFFFFFFFF)
+		, texture(AssetsManager::Get().LoadTile(tilemap_name, texture_name))
+	{ }
 
 	~Material() = default;
 };
