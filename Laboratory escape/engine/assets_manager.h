@@ -32,7 +32,7 @@ private:
 
 		auto image = new sf::Image;
 
-		image->loadFromFile(name + ".png");
+		image->loadFromFile("assets/" + name + ".png");
 		images.emplace(name, image);
 
 		return *image;
@@ -65,7 +65,7 @@ public:
 			return *textures.at(full_name);
 
 		auto image = LoadImage(map_name);
-		std::ifstream data(map_name + ".dat", std::ifstream::in);
+		std::ifstream data("assets/" + map_name + ".dat", std::ifstream::in);
 
 		std::size_t count;
 		data >> count;
