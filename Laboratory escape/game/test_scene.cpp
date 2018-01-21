@@ -30,11 +30,14 @@ void TestScene::Start()
 	{
 		for (int y = 0; y < 4; ++y)
 		{
+			auto p = 3 * (1 + (y == 0) - (y == 3)) + (1 - (x == 1) + (x == 7));
+
 			auto stone = new GameObject;
-			stone->AddComponent(new Renderer("dungeon_tileset",
-				y == 3 ? x == 7 ? "ground_top_right" : "ground_top" : x == 7 ? "ground_right" : "ground_center"));
+			stone->AddComponent(new Renderer("dungeon_tileset", "ground_" + std::to_string(p)));
+
 			stone->transform.scale *= 2.f;
 			stone->transform.position = sf::Vector2f(32 * 2 * x, 480 - 32 * 2 * (y + 1));
+
 			objects.push_back(stone);
 		}
 	}
