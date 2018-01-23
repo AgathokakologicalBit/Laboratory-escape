@@ -29,6 +29,8 @@ public:
 	virtual void Update() {
 		for (auto obj : objects)
 		{
+			if (!obj->is_active) continue;
+
 			if (!obj->is_initialized)
 			{
 				obj->Start();

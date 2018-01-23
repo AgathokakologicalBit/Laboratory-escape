@@ -13,6 +13,7 @@ protected:
 	GameObject * object = nullptr;
 
 public:
+	bool is_active = true;
 	std::string name;
 
 

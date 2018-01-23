@@ -17,6 +17,8 @@ private:
 	bool is_initialized = false;
 
 public:
+	bool is_active = true;
+
 	std::string name;
 	Layer layer;
 

@@ -12,6 +12,8 @@ void GameObject::Update()
 {
 	for (auto c : _components)
 	{
+		if (!c->is_active) continue;
+
 		if (!c->is_initialized)
 		{
 			c->Start();
