@@ -21,10 +21,7 @@ class PlayerComponent final : public Behavior
 
 void TestScene::Start()
 {
-	auto player = new GameObject;
-	player->AddComponent(new PlayerComponent);
-	player->AddComponent(new Renderer("player"));
-	objects.push_back(player);
+	SpawnObject(new PlayerComponent, new Renderer("player"));
 
 	for (int x = 1; x < 8; ++x)
 	{
@@ -32,13 +29,10 @@ void TestScene::Start()
 		{
 			auto p = 3 * (1 + (y == 0) - (y == 3)) + (1 - (x == 1) + (x == 7));
 
-			auto stone = new GameObject;
-			stone->AddComponent(new Renderer("dungeon_tileset", "ground_" + std::to_string(p)));
+			auto stone = SpawnObject(new Renderer("dungeon_tileset", "ground_" + std::to_string(p)));
 
 			stone->transform.scale *= 2.f;
-			stone->transform.position = sf::Vector2f(32 * 2 * x, 480 - 32 * 2 * (y + 1));
-
-			objects.push_back(stone);
+			stone->transform.position = sf::Vector2f(64 * x, 480 - 64 * (y + 1));
 		}
 	}
 }

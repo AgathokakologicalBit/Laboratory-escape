@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cassert>
 #include <string>
 #include "types.h"
 #include "state.h"
@@ -36,4 +37,19 @@ public:
 			obj->Update();
 		}
 	};
+
+
+public:
+	template <typename... Ct>
+	GameObject * SpawnObject(Ct * ... components)
+	{
+		auto obj = new GameObject;
+		
+		bool res = ((obj->AddComponent(components)) & ...);
+		assert(res);
+
+		objects.push_back(obj);
+		return obj;
+	}
+
 };
