@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <string>
+#include <memory>
 #include "types.h"
 #include "state.h"
 #include "game_object.h"
@@ -13,7 +14,7 @@ public:
 	SceneId id;
 	std::string name;
 
-	std::vector<GameObject *> objects;
+	std::vector<std::shared_ptr<GameObject>> objects;
 
 public:
 	Scene() = default;
@@ -43,11 +44,11 @@ public:
 
 public:
 	template <typename... Ct>
-	GameObject * SpawnObject(Ct * ... components)
+	std::shared_ptr<GameObject> SpawnObject()
 	{
-		auto obj = new GameObject;
+		auto obj = std::make_shared<GameObject>();
 		
-		bool res = ((obj->AddComponent(components)) & ...);
+		bool res = ((obj->AddComponent(new Ct)) & ...);
 		assert(res);
 
 		objects.push_back(obj);

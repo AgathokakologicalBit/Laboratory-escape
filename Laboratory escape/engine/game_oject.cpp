@@ -10,7 +10,7 @@ void GameObject::Awake() {}
 void GameObject::Start() {}
 void GameObject::Update()
 {
-	for (auto c : _components)
+	for (auto & c : _components)
 	{
 		if (!c->is_active) continue;
 
@@ -25,7 +25,7 @@ void GameObject::Update()
 
 void GameObject::Finish()
 {
-	for (auto c : _components)
+	for (auto & c : _components)
 		c->Finish();
 }
 
@@ -33,7 +33,7 @@ bool GameObject::AddComponent(Component * component)
 {
 	if (!component) return false;
 	
-	_components.push_back(component);
+	_components.emplace_back(component);
 
 	component->object = this;
 	component->Awake();

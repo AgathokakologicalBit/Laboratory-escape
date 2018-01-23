@@ -3,7 +3,9 @@
 #include <SFML/Graphics.hpp>
 #include <algorithm>
 #include <string>
+#include <string_view>
 #include <map>
+#include <memory>
 #include <iostream>
 #include <fstream>
 
@@ -11,8 +13,8 @@
 class AssetsManager final
 {
 private:
-	std::map<std::string, sf::Image const *> images;
-	std::map<std::string, sf::Texture const *> textures;
+	std::map<std::string, std::shared_ptr<sf::Image const>> images;
+	std::map<std::string, std::shared_ptr<sf::Texture const>> textures;
 
 public:
 	static AssetsManager & Get()
@@ -23,55 +25,63 @@ public:
 
 
 private:
-	sf::Image const & LoadImage(std::string name)
+	std::shared_ptr<sf::Image const> LoadImage(std::string_view name)
 	{
-		if (images.count(name))
-			return *images.at(name);
+		std::string name_str(name);
+
+		if (images.count(name_str))
+			return images.at(name_str);
 		
 		std::cout << "Load image '" << name << "' from drive\n";
 
-		auto image = new sf::Image;
+		auto image = std::make_shared<sf::Image>();
 
-		image->loadFromFile("assets/" + name + ".png");
+		image->loadFromFile("assets/" + name_str + ".png");
 		images.emplace(name, image);
 
-		return *image;
+		return image;
 	}
 
 public:
-	sf::Texture const & LoadTexture(std::string name)
+	std::shared_ptr<sf::Texture const> LoadTexture(std::string_view name)
 	{
-		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		std::string name_str(name);
+		std::transform(name_str.begin(), name_str.end(), name_str.begin(), ::tolower);
 		
-		if (textures.count(name))
-			return *textures.at(name);
+		if (textures.count(name_str))
+			return textures.at(name_str);
 
-		auto image = LoadImage(name);
-		auto texture = new sf::Texture;
+		auto image = LoadImage(name_str);
+		auto texture = std::make_shared<sf::Texture>();
 
-		texture->loadFromImage(image);
-		textures.emplace(name, texture);
+		texture->loadFromImage(*image);
+		textures.emplace(name_str, texture);
 		
-		return *texture;
+		return texture;
 	}
 
-	sf::Texture const & LoadTile(std::string map_name, std::string name)
+	std::shared_ptr<sf::Texture const> LoadTile(std::string_view map_name, std::string_view name)
 	{
-		std::transform(map_name.begin(), map_name.end(), map_name.begin(), ::tolower);
-		std::transform(name.begin(), name.end(), name.begin(), ::tolower);
+		std::string map_name_str(map_name);
+		std::string name_str(name);
 
-		auto full_name = map_name + '/' + name;
+		std::transform(map_name_str.begin(), map_name_str.end(), map_name_str.begin(), ::tolower);
+		std::transform(name_str.begin(), name_str.end(), name_str.begin(), ::tolower);
+
+		
+
+		auto full_name = map_name_str + '/' + name_str;
 		if (textures.count(full_name))
-			return *textures.at(full_name);
+			return textures.at(full_name);
 
 		auto image = LoadImage(map_name);
-		std::ifstream data("assets/" + map_name + ".dat", std::ifstream::in);
+		std::ifstream data("assets/" + map_name_str + ".dat", std::ifstream::in);
 
 		std::size_t count;
 		data >> count;
 		for (std::size_t i = 0; i < count; ++i)
 		{
-			auto texture = new sf::Texture;
+			auto texture = std::make_shared<sf::Texture>();
 			sf::Vector2i offset, size;
 			std::string name;
 			data >> name >> offset.y >> offset.x >> size.y >> size.x;
@@ -81,10 +91,10 @@ public:
 				<< "' with offset (" << offset.y << ", " << offset.x << ')'
 				<< ", size (" << size.y << ", " << size.x << ")\n";
 			
-			texture->loadFromImage(image, sf::IntRect(offset, size));
-			textures.emplace(map_name + '/' + name, texture);
+			texture->loadFromImage(*image, sf::IntRect(offset, size));
+			textures.emplace(map_name_str + '/' + name, texture);
 		}
 
-		return *textures.at(full_name);
+		return textures.at(full_name);
 	}
 };

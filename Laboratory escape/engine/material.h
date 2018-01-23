@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <string>
+#include <string_view>
 #include "assets_manager.h"
 
 
@@ -11,7 +12,7 @@ public:
 	std::string name;
 
 	sf::Color tint;
-	sf::Texture const & texture;
+	std::shared_ptr<sf::Texture const> texture;
 
 
 public:
@@ -28,4 +29,16 @@ public:
 	{ }
 
 	~Material() = default;
+
+
+public:
+	void SetTexture(std::string_view name)
+	{
+		texture = AssetsManager::Get().LoadTexture(name);
+	}
+
+	void SetTexture(std::string_view map_name, std::string_view name)
+	{
+		texture = AssetsManager::Get().LoadTile(map_name, name);
+	}
 };

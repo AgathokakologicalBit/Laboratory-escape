@@ -1,6 +1,7 @@
 #include "test_scene.h"
 #include "../engine/engine.h"
 #include "../engine/components/renderer.h"
+#include "../engine/game_object.h"
 
 
 class PlayerComponent final : public Behavior
@@ -21,7 +22,8 @@ class PlayerComponent final : public Behavior
 
 void TestScene::Start()
 {
-	SpawnObject(new PlayerComponent, new Renderer("player"));
+	auto player = SpawnObject<PlayerComponent, Renderer>();
+	player->GetComponent<Renderer>()->material.SetTexture("player");
 
 	for (int x = 1; x < 8; ++x)
 	{
@@ -29,7 +31,8 @@ void TestScene::Start()
 		{
 			auto p = 3 * (1 + (y == 0) - (y == 3)) + (1 - (x == 1) + (x == 7));
 
-			auto stone = SpawnObject(new Renderer("dungeon_tileset", "ground_" + std::to_string(p)));
+			auto stone = SpawnObject<Renderer>();
+			stone->GetComponent<Renderer>()->material.SetTexture("dungeon_tileset", "ground_" + std::to_string(p));
 
 			stone->transform.scale *= 2.f;
 			stone->transform.position = sf::Vector2f(64 * x, 480 - 64 * (y + 1));

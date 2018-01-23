@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+#include <string_view>
 #include "../behavior.h"
 #include "../material.h"
 #include "../types.h"
@@ -12,6 +14,10 @@ public:
 
 
 public:
+	Renderer()
+		: layer(0)
+		, material()
+	{ }
 	Renderer(std::string texture_name)
 		: layer(0)
 		, material(texture_name)

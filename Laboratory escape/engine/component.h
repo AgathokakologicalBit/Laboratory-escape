@@ -14,7 +14,6 @@ protected:
 
 public:
 	bool is_active = true;
-	std::string name;
 
 
 public:
