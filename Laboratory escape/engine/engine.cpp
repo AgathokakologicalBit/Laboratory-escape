@@ -32,6 +32,7 @@ bool Engine::Update()
 	time.delta = time.clock.restart().asSeconds();
 
 	scene_manager.Update();
+	physics_engine.Update();
 	rendering_engine.Update();
 
 	return true;

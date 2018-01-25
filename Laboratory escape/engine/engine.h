@@ -3,6 +3,7 @@
 #include "time.h"
 #include "scene_manager.h"
 #include "rendering_engine.h"
+#include "physics_engine.h"
 
 
 class Engine
@@ -10,7 +11,9 @@ class Engine
 public:
 	Time time;
 	SceneManager scene_manager;
+	
 	RenderingEngine rendering_engine;
+	PhysicsEngine physics_engine;
 
 
 public:
