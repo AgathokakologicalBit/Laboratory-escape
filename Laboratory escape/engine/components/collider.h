@@ -4,7 +4,7 @@
 #include "../behavior.h"
 
 
-class Collider final : public virtual Behavior
+class Collider final : public Behavior
 {
 public:
 	enum class Type {
@@ -13,7 +13,7 @@ public:
 		Circle,
 	};
 
-	Type type;
+	Type type{ Type::Mesh };
 
 	sf::Vector2f offset{ .0f, .0f };
 	sf::Vector2f pivot{ .5f, .5f };

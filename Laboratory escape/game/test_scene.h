@@ -7,9 +7,6 @@
 
 class TestScene final : public Scene
 {
-private:
-	sf::Sprite sprite;
-
 public:
 	void Start();
 };

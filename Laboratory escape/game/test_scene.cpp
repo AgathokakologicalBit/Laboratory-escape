@@ -2,6 +2,7 @@
 #include "../engine/engine.h"
 #include "../engine/components/renderer.h"
 #include "../engine/game_object.h"
+#include "../engine/timer.h"
 
 
 class PlayerComponent final : public Behavior
@@ -22,6 +23,8 @@ class PlayerComponent final : public Behavior
 
 void TestScene::Start()
 {
+	Timer $timer_scene_start("scene start");
+
 	auto player = SpawnObject<PlayerComponent, Renderer>();
 	player->GetComponent<Renderer>()->material.SetTexture("player");
 
