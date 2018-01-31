@@ -2,11 +2,14 @@
 
 #include <SFML/Graphics.hpp>
 #include "../behavior.h"
+#include "mesh.h"
 
 
 class Collider final : public Behavior
 {
 public:
+	bool is_static = false;
+
 	enum class Type {
 		Mesh,
 		Box,
@@ -30,6 +33,12 @@ public:
 		{
 			float radius;
 		} circle;
+
+		union
+		{
+			float scale;
+			Mesh * data;
+		} mesh;
 	} data{ 0.0 };
 
 public:
