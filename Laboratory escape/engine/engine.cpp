@@ -21,7 +21,6 @@ bool Engine::Update()
 	if (!rendering_engine.window.isOpen() || scene_manager.Empty())
 		return false;
 
-	std::cout << "\n\n";
 	Timer $timer_engine_update("full update");
 
 	sf::Event event;

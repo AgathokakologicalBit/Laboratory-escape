@@ -32,13 +32,13 @@ public:
 
 
 public:
-	void SetTexture(std::string_view name)
+	void SetTexture(std::string_view name_)
 	{
-		texture = AssetsManager::Get().LoadTexture(name);
+		texture = AssetsManager::Get().LoadTexture(name_);
 	}
 
-	void SetTexture(std::string_view map_name, std::string_view name)
+	void SetTexture(std::string_view map_name, std::string_view name_)
 	{
-		texture = AssetsManager::Get().LoadTile(map_name, name);
+		texture = AssetsManager::Get().LoadTile(map_name, name_);
 	}
 };

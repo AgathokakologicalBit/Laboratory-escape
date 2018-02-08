@@ -1,23 +1,21 @@
 #pragma once
 
 #include "components/mesh.h"
+#include "components/collider.h"
+#include "components/rigidbody.h"
 
 
 class PhysicsEngine
 {
 private:
-	struct Collider { };
-
-private:
-	std::vector<Collider> colliders;
+	std::vector<std::pair<Collider const *, Rigidbody const *>> bodies;
 
 
 public:
 	void Update();
 
-	void PushMesh(sf::Vector2f position, sf::Vector2f size, Mesh const & mesh);
-	void PushCircle(sf::Vector2f position, float size);
-
+	void Push(Collider const * collider, Rigidbody const * rigidbody);
+	
 
 	friend class Engine;
 };

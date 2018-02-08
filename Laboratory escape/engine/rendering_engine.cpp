@@ -1,5 +1,4 @@
 #include "rendering_engine.h"
-#include <iostream>
 
 
 void RenderingEngine::Push(RenderAction && action)

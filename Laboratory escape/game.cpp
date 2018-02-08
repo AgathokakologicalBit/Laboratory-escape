@@ -1,7 +1,7 @@
-#include <SFML/Graphics.hpp>
 #include "engine/engine.h"
 
 #include "game/test_scene.h"
+
 
 int main()
 {

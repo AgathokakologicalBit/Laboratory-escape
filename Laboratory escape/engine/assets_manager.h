@@ -6,9 +6,11 @@
 #include <string_view>
 #include <map>
 #include <memory>
-#include <iostream>
 #include <fstream>
 
+#ifdef DEBUG_
+#include <iostream>
+#endif
 
 class AssetsManager final
 {
@@ -32,8 +34,9 @@ private:
 		if (images.count(name_str))
 			return images.at(name_str);
 		
+#ifdef DEBUG_
 		std::cout << "Load image '" << name << "' from drive\n";
-
+#endif
 		auto image = std::make_shared<sf::Image>();
 
 		image->loadFromFile("assets/" + name_str + ".png");
@@ -83,16 +86,17 @@ public:
 		{
 			auto texture = std::make_shared<sf::Texture>();
 			sf::Vector2i offset, size;
-			std::string name;
-			data >> name >> offset.y >> offset.x >> size.y >> size.x;
+			std::string tile_name;
+			data >> tile_name >> offset.y >> offset.x >> size.y >> size.x;
 
+#ifdef DEBUG_
 			std::cout
 				<< "  Load sub-tile '" << name
 				<< "' with offset (" << offset.y << ", " << offset.x << ')'
 				<< ", size (" << size.y << ", " << size.x << ")\n";
-			
+#endif
 			texture->loadFromImage(*image, sf::IntRect(offset, size));
-			textures.emplace(map_name_str + '/' + name, texture);
+			textures.emplace(map_name_str + '/' + tile_name, texture);
 		}
 
 		return textures.at(full_name);

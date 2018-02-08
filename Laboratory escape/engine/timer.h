@@ -4,11 +4,13 @@
 #include <string>
 #include <utility>
 #include <chrono>
+#ifdef DEBUG_
 #include <iostream>
 #include <iomanip>
+#endif
 
-
-class Timer
+#ifdef _DEBUG
+class Timer final
 {
 public:
 	std::string const name;
@@ -35,5 +37,13 @@ public:
 		std::cout
 			<< "[Timer] " << name << ": "
 			<< std::setprecision(3) << passed << " ms" << '\n';
+
 	}
 };
+#else
+class Timer final
+{
+public:
+	explicit Timer(std::string name_) { };
+};
+#endif

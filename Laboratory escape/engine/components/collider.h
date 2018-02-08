@@ -1,12 +1,17 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+
 #include "../behavior.h"
 #include "mesh.h"
+#include "rigidbody.h"
 
 
 class Collider final : public Behavior
 {
+private:
+	Rigidbody * rigidbody;
+
 public:
 	bool is_static = false;
 
@@ -42,5 +47,8 @@ public:
 	} data{ 0.0 };
 
 public:
-	void Update() const;
+	void Awake();
+	void Update();
+	void Start();
+	void Finish();
 };
