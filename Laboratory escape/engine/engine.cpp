@@ -2,6 +2,10 @@
 #include "engine.h"
 #include "timer.h"
 
+#ifdef _DEBUG
+#include <iostream>
+#endif
+
 
 Engine::Engine()
 	: time()
@@ -20,6 +24,10 @@ bool Engine::Update()
 {
 	if (!rendering_engine.window.isOpen() || scene_manager.Empty())
 		return false;
+
+#ifdef _DEBUG
+	std::cout << '\n';
+#endif
 
 	Timer $timer_engine_update("full update");
 
@@ -43,10 +51,8 @@ bool Engine::Update()
 		Timer $timer_update("physics update");
 		physics_engine.Update();
 	}
-	{
-		Timer $timer_update("rendering update");
-		rendering_engine.Update();
-	}
+
+	rendering_engine.Update();
 
 	return true;
 }

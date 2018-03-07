@@ -19,7 +19,7 @@ class PlayerComponent final : public Behavior
 
 void TestScene::Start()
 {
-	auto player = SpawnObject<PlayerComponent, Renderer>();
+	auto player = SpawnObject<PlayerComponent, Collider, Renderer>();
 	player->GetComponent<Renderer>()->material.SetTexture("player");
 
 	for (int x = 1; x < 8; ++x)
@@ -28,7 +28,7 @@ void TestScene::Start()
 		{
 			auto p = 3 * (1 + (y == 0) - (y == 3)) + (1 - (x == 1) + (x == 7));
 
-			auto stone = SpawnObject<Renderer, Collider>();
+			auto stone = SpawnObject<Collider, Renderer>();
 			stone->GetComponent<Renderer>()->material.SetTexture("dungeon_tileset", "ground_" + std::to_string(p));
 
 			stone->transform.scale *= 2.f;
