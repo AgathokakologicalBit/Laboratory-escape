@@ -9,26 +9,26 @@
 class Engine
 {
 public:
-	Time time;
-	SceneManager scene_manager;
-	
-	RenderingEngine rendering_engine;
-	PhysicsEngine physics_engine;
+    Time time;
+    SceneManager scene_manager;
+
+    RenderingEngine rendering_engine;
+    PhysicsEngine physics_engine;
 
 
 public:
-	Engine();
-	~Engine() = default;
+    Engine();
+    ~Engine() = default;
 
-	static Engine & Get()
-	{
-		static auto instance = new Engine;
-		return *instance;
-	}
-	
+    static Engine & Get()
+    {
+        static auto instance = new Engine;
+        return *instance;
+    }
+
 
 public:
-	int Start();
-	bool Update();
-	void Stop();
+    int Start();
+    bool Update();
+    void Stop();
 };

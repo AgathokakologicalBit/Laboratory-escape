@@ -14,37 +14,38 @@
 class Timer final
 {
 public:
-	std::string const name;
+    std::string const name;
 
 private:
-	std::chrono::high_resolution_clock::time_point start;
+    std::chrono::high_resolution_clock::time_point start;
 
 public:
-	explicit Timer(std::string name_)
-		: name(std::move(name_))
-		, start(std::chrono::high_resolution_clock::now())
-	{ }
+    explicit Timer(std::string name_)
+        : name(std::move(name_))
+        , start(std::chrono::high_resolution_clock::now())
+    { }
 
-	~Timer()
-	{
-		using namespace std::chrono;
-		auto duration = high_resolution_clock::now() - start;
+    ~Timer()
+    {
+        using namespace std::chrono;
+        auto duration = high_resolution_clock::now() - start;
 
-		auto ms = duration_cast<milliseconds>(duration).count();
-		auto us = duration_cast<microseconds>(duration).count() % 1000;
+        auto ms = duration_cast<milliseconds>(duration).count();
+        auto us = duration_cast<microseconds>(duration).count() % 1000;
 
-		double passed = ms + us / 1000.;
+        double passed = ms + us / 1000.;
 
-		std::cout
-			<< "[Timer] " << name << ": "
-			<< std::setprecision(3) << passed << " ms" << '\n';
+        std::cout
+            << "[Timer] " << name << ": "
+            << std::setprecision(3) << passed << " ms" << '\n';
 
-	}
+    }
 };
 #else
 class Timer final
 {
 public:
-	explicit Timer(std::string name_) { };
+    explicit Timer(std::string name_)
+    { };
 };
 #endif

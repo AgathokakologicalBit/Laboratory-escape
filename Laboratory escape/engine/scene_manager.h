@@ -5,13 +5,16 @@
 #include "scene.h"
 
 
-class SceneManager final : public StateMachine<Scene>
+class SceneManager final: public StateMachine<Scene>
 {
 public:
-	SceneManager() = default;
-	~SceneManager() = default;
+    SceneManager() = default;
+    ~SceneManager() = default;
 
 
 public:
-	void Load(Scene * scene, StatePushMode mode) { Push(scene, mode); }
+    void Load(Scene * scene, StatePushMode mode)
+    {
+        Push(scene, mode);
+    }
 };

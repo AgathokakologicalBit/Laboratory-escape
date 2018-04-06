@@ -9,8 +9,8 @@
 #include "../engine/components/renderer.h"
 
 
-class TestScene final : public Scene
+class TestScene final: public Scene
 {
 public:
-	void Start();
+    void Start();
 };

@@ -1,17 +1,16 @@
 #include "engine/engine.h"
-
 #include "game/test_scene.h"
 
 
 int main()
 {
-	auto error = Engine::Get().Start();
-	if (error) return error;
+    auto error = Engine::Get().Start();
+    if (error) return error;
 
-	Engine::Get().scene_manager.Load(new TestScene, SceneManager::StatePushMode::APPEND);
+    Engine::Get().scene_manager.Load(new TestScene, SceneManager::StatePushMode::APPEND);
 
-	while (Engine::Get().Update()) ;
-	Engine::Get().Stop();
+    while (Engine::Get().Update());
+    Engine::Get().Stop();
 
-	return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }

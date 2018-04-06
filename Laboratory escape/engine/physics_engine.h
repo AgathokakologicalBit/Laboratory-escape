@@ -8,14 +8,14 @@
 class PhysicsEngine
 {
 private:
-	std::vector<std::pair<Collider const *, Rigidbody const *>> bodies;
+    std::vector<std::pair<Collider const *, Rigidbody const *>> bodies;
 
 
 public:
-	void Update();
+    void Update();
 
-	void Push(Collider const * collider, Rigidbody const * rigidbody);
-	
+    void Push(Collider const * collider, Rigidbody const * rigidbody);
 
-	friend class Engine;
+
+    friend class Engine;
 };

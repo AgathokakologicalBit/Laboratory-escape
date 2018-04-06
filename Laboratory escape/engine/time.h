@@ -5,12 +5,18 @@
 class Time
 {
 private:
-	sf::Clock clock;
-	float delta;
+    sf::Clock clock;
+    float delta;
 
 public:
-	inline float Delta() const { return delta; }
-	inline float Fps() const { return 1.f / delta; }
+    inline float Delta() const
+    {
+        return delta;
+    }
+    inline float Fps() const
+    {
+        return 1.f / delta;
+    }
 
-	friend class Engine;
+    friend class Engine;
 };

@@ -4,13 +4,13 @@
 #include "../behavior.h"
 
 
-class Rigidbody final : public Behavior
+class Rigidbody final: public Behavior
 {
 public:
-	sf::Vector2f velocity;
-	sf::Vector2f acceleration;
-	
+    sf::Vector2f velocity;
+    sf::Vector2f acceleration;
+
 
 public:
-	void AddForce(float direction, float force);
+    void AddForce(float direction, float force);
 };

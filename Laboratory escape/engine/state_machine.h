@@ -10,51 +10,57 @@ template <typename StateType>
 class StateMachine
 {
 public:
-	enum StatePushMode
-	{
-		IGNORE,
-		REPLACE,
-		APPEND,
-	};
+    enum StatePushMode
+    {
+        IGNORE,
+        REPLACE,
+        APPEND,
+    };
 
 private:
-	std::stack<StateType *> states;
-	StateType * awaiting_state;
-	StatePushMode awaiting_push_mode;
+    std::stack<StateType *> states;
+    StateType * awaiting_state;
+    StatePushMode awaiting_push_mode;
 
 
 public:
-	void Push(StateType * state, StatePushMode mode)
-	{
-		assert(awaiting_push_mode == StatePushMode::IGNORE);
-		awaiting_state = state;
-		awaiting_push_mode = mode;
-	}
+    void Push(StateType * state, StatePushMode mode)
+    {
+        assert(awaiting_push_mode == StatePushMode::IGNORE);
+        awaiting_state = state;
+        awaiting_push_mode = mode;
+    }
 
-	void Pop();
-	StateType * Top() const { return states.empty() ? nullptr : states.top(); }
+    void Pop();
+    StateType * Top() const
+    {
+        return states.empty() ? nullptr : states.top();
+    }
 
-	bool Empty() const { return states.empty() && awaiting_state == nullptr; }
+    bool Empty() const
+    {
+        return states.empty() && awaiting_state == nullptr;
+    }
 
-	void Update()
-	{
-		if (!states.empty()) states.top()->Update();
+    void Update()
+    {
+        if (!states.empty()) states.top()->Update();
 
-		if (awaiting_push_mode == IGNORE) return;
+        if (awaiting_push_mode == IGNORE) return;
 
-		if (!states.empty())
-			states.top()->Pause();
+        if (!states.empty())
+            states.top()->Pause();
 
-		if (awaiting_push_mode == REPLACE && !states.empty())
-		{
-			states.top()->Stop();
-			states.pop();
-		}
+        if (awaiting_push_mode == REPLACE && !states.empty())
+        {
+            states.top()->Stop();
+            states.pop();
+        }
 
-		states.push(awaiting_state);
-		states.top()->Start();
+        states.push(awaiting_state);
+        states.top()->Start();
 
-		awaiting_push_mode = IGNORE;
-		awaiting_state = nullptr;
-	}
+        awaiting_push_mode = IGNORE;
+        awaiting_state = nullptr;
+    }
 };

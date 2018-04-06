@@ -8,12 +8,12 @@
 void PhysicsEngine::Update()
 {
 #ifdef _DEBUG
-	std::cout << "Physical bodies: " << this->bodies.size() << '\n';
+    std::cout << "Physical bodies: " << this->bodies.size() << '\n';
 #endif
-	this->bodies.clear();
+    this->bodies.clear();
 }
 
 void PhysicsEngine::Push(Collider const * collider, Rigidbody const * rigidbody)
 {
-	this->bodies.emplace_back(collider, rigidbody);
+    this->bodies.emplace_back(collider, rigidbody);
 }

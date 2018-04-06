@@ -7,48 +7,49 @@
 #include "rigidbody.h"
 
 
-class Collider final : public Behavior
+class Collider final: public Behavior
 {
 private:
-	Rigidbody * rigidbody;
+    Rigidbody * rigidbody;
 
 public:
-	bool is_static = false;
+    bool is_static = false;
 
-	enum class Type {
-		Mesh,
-		Box,
-		Circle,
-	};
+    enum class Type
+    {
+        Mesh,
+        Box,
+        Circle,
+    };
 
-	Type type{ Type::Mesh };
+    Type type { Type::Mesh };
 
-	sf::Vector2f offset{ .0f, .0f };
-	sf::Vector2f pivot{ .5f, .5f };
+    sf::Vector2f offset { .0f, .0f };
+    sf::Vector2f pivot { .5f, .5f };
 
-	union
-	{
-		union
-		{
-			float width;
-			float height;
-		} box;
+    union
+    {
+        union
+        {
+            float width;
+            float height;
+        } box;
 
-		union
-		{
-			float radius;
-		} circle;
+        union
+        {
+            float radius;
+        } circle;
 
-		union
-		{
-			float scale;
-			Mesh * data;
-		} mesh;
-	} data{ 0.0 };
+        union
+        {
+            float scale;
+            Mesh * data;
+        } mesh;
+    } data { 0.0 };
 
 public:
-	void Awake();
-	void Update();
-	void Start();
-	void Finish();
+    void Awake();
+    void Update();
+    void Start();
+    void Finish();
 };
