@@ -10,7 +10,7 @@
 class Collider final: public Behavior
 {
 private:
-    Rigidbody * rigidbody;
+    Rigidbody * rigidbody = nullptr;
 
 public:
     bool is_static = false;

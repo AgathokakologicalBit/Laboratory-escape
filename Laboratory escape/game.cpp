@@ -9,7 +9,7 @@ int main()
 
     Engine::Get().scene_manager.Load(new TestScene, SceneManager::StatePushMode::APPEND);
 
-    while (Engine::Get().Update());
+    while (Engine::Get().Update()) continue;
     Engine::Get().Stop();
 
     return EXIT_SUCCESS;

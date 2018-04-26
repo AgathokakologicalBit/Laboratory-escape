@@ -71,8 +71,6 @@ public:
         std::transform(map_name_str.begin(), map_name_str.end(), map_name_str.begin(), ::tolower);
         std::transform(name_str.begin(), name_str.end(), name_str.begin(), ::tolower);
 
-
-
         auto full_name = map_name_str + '/' + name_str;
         if (textures.count(full_name))
             return textures.at(full_name);

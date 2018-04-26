@@ -49,12 +49,14 @@ public:
         if (awaiting_push_mode == IGNORE) return;
 
         if (!states.empty())
+        {
             states.top()->Pause();
 
-        if (awaiting_push_mode == REPLACE && !states.empty())
-        {
-            states.top()->Stop();
-            states.pop();
+            if (awaiting_push_mode == REPLACE)
+            {
+                states.top()->Stop();
+                states.pop();
+            }
         }
 
         states.push(awaiting_state);
