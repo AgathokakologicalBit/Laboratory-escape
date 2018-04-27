@@ -12,7 +12,7 @@ void Renderer::Update()
     static auto & engine = Engine::Get().rendering_engine;
     if (!material.texture->getSize().x
         || !material.texture->getSize().y) return;
-    engine.Push(RenderAction(layer, object->transform, &*material.texture));
+    engine.Push(RenderAction(layer, object->transform, material));
 }
 
 void Renderer::Finish()

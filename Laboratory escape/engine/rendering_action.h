@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "transform.h"
+#include "material.h"
 
 
 struct RenderAction final
@@ -21,20 +22,22 @@ private:
     float rotation;
     sf::Vector2f scale;
 
-    union
+    struct
     {
         sf::Texture const * texture;
+        sf::Color tint;
     } draw_data;
 
 public:
-    RenderAction(int layer, Transform const & transform, sf::Texture const * const texture)
+    RenderAction(int layer, Transform const & transform, Material const & material)
         : type(Type::DrawTexture)
         , layer(layer)
         , position(transform.position)
         , rotation(transform.rotation)
         , scale(transform.scale)
     {
-        draw_data.texture = texture;
+        draw_data.texture = material.texture ? &*material.texture : nullptr;
+        draw_data.tint = material.tint;
     }
 
 
