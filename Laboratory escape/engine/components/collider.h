@@ -18,7 +18,6 @@ public:
     enum class Type
     {
         Mesh,
-        Box,
         Circle,
     };
 
@@ -29,12 +28,6 @@ public:
 
     union
     {
-        union
-        {
-            float width;
-            float height;
-        } box;
-
         union
         {
             float radius;

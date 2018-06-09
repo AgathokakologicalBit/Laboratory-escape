@@ -7,8 +7,11 @@
 
 class PhysicsEngine
 {
+public:
+    using body_info_t = std::pair<Collider const *, Rigidbody const *>;
+
 private:
-    std::vector<std::pair<Collider const *, Rigidbody const *>> bodies;
+    std::vector<body_info_t> bodies;
 
 
 public:
