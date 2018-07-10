@@ -8,11 +8,6 @@ class PlayerComponent final: public Behavior
         object->transform.scale = sf::Vector2f(4, 4);
     }
 
-    void Start() final override
-    { }
-    void Finish() final override
-    { }
-
     void Update() final override
     {
         object->transform.position += sf::Vector2f(50, 25) * Engine::Get().time.Delta();
