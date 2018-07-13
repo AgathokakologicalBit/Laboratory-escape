@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "engine.h"
-#include "timer.h"
+#include "util/timer.h"
 
 #ifdef _DEBUG
 #include <iostream>

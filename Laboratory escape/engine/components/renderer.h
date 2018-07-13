@@ -4,7 +4,7 @@
 #include <string_view>
 #include "../behavior.h"
 #include "../material.h"
-#include "../types.h"
+#include "../util/types.h"
 
 class Renderer final: public Behavior
 {

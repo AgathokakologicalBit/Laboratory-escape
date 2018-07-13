@@ -1,7 +1,7 @@
 #pragma once
 
-#include "types.h"
-#include "state_machine.h"
+#include "util/types.h"
+#include "util/state_machine.h"
 #include "scene.h"
 
 

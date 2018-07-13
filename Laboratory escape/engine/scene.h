@@ -3,8 +3,8 @@
 #include <cassert>
 #include <string>
 #include <memory>
-#include "types.h"
-#include "state.h"
+#include "util/types.h"
+#include "util/state.h"
 #include "game_object.h"
 
 

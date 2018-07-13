@@ -8,7 +8,7 @@
 #include <typeindex>
 
 #include "component.h"
-#include "types.h"
+#include "util/types.h"
 #include "transform.h"
 
 
