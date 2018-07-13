@@ -53,11 +53,10 @@ public:
     {
         auto obj = std::make_shared<GameObject>();
 
-        bool res = ((obj->AddComponent(new Ct)) & ...);
+        bool res = ((obj->AddComponent(new Ct)) & ... & 1);
         assert(res);
 
         objects.push_back(obj);
         return obj;
     }
-
 };
