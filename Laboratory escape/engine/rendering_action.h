@@ -1,6 +1,8 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
+#include <optional>
+
 #include "transform.h"
 #include "material.h"
 
@@ -10,7 +12,9 @@ struct RenderAction final
 public:
     enum class Type
     {
-        DrawTexture
+        DrawSprite,
+        DrawShape,
+        DrawText,
     };
 
 private:
@@ -22,23 +26,35 @@ private:
     float rotation;
     sf::Vector2f scale;
 
-    struct
+    struct draw_data_t
     {
-        sf::Texture const * texture;
+        std::shared_ptr<sf::Texture const> texture;
         sf::Color tint;
+
+        union
+        {
+            sf::Shape * shape;
+        };
     } draw_data;
 
 public:
     RenderAction(int layer, Transform const & transform, Material const & material)
-        : type(Type::DrawTexture)
+        : type(Type::DrawSprite)
         , layer(layer)
         , position(transform.position)
         , rotation(transform.rotation)
         , scale(transform.scale)
-    {
-        draw_data.texture = material.texture ? &*material.texture : nullptr;
-        draw_data.tint = material.tint;
-    }
+        , draw_data { material.texture, material.tint }
+    { }
+
+    RenderAction(int layer, Transform const & transform, Material const & material, sf::Shape * shape)
+        : type(Type::DrawShape)
+        , layer(layer)
+        , position(transform.position)
+        , rotation(transform.rotation)
+        , scale(transform.scale)
+        , draw_data { material.texture, material.tint, shape }
+    { }
 
 
     bool operator < (RenderAction const & r) const

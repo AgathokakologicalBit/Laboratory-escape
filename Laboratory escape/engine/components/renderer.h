@@ -6,7 +6,7 @@
 #include "../material.h"
 #include "../util/types.h"
 
-class Renderer final: public Behavior
+class Renderer: public Behavior
 {
 public:
     Layer layer;
@@ -17,21 +17,38 @@ public:
     Renderer()
         : layer(0)
         , material()
-    { }
-    Renderer(std::string texture_name)
-        : layer(0)
-        , material(texture_name)
-    { }
-
-    Renderer(std::string tilemap_name, std::string texture_name)
-        : layer(0)
-        , material(tilemap_name, texture_name)
-    { }
+    { };
 
 
 public:
-    void Awake() final override;
-    void Start() final override;
-    void Update() final override;
-    void Finish() final override;
+    virtual void Awake() override
+    { };
+    virtual void Start() override
+    { };
+    virtual void Update() override = 0;
+    virtual void Finish() override
+    { };
+};
+
+
+class SpriteRenderer: public Renderer
+{
+public:
+    virtual void Update() override;
+};
+
+class ShapeRenderer: public Renderer
+{
+private:
+    std::unique_ptr<sf::Shape> shape;
+
+
+public:
+    inline void SetShape(sf::Shape * shape)
+    {
+        this->shape.reset(shape);
+    }
+
+public:
+    virtual void Update() override;
 };

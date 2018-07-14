@@ -2,12 +2,7 @@
 #include "../engine.h"
 
 
-void Renderer::Awake()
-{ }
-void Renderer::Start()
-{ }
-
-void Renderer::Update()
+void SpriteRenderer::Update()
 {
     static auto & engine = Engine::Get().rendering_engine;
     if (!material.texture->getSize().x
@@ -15,5 +10,9 @@ void Renderer::Update()
     engine.Push(RenderAction(layer, object->transform, material));
 }
 
-void Renderer::Finish()
-{ }
+void ShapeRenderer::Update()
+{
+    static auto & engine = Engine::Get().rendering_engine;
+    if (!shape) return;
+    engine.Push(RenderAction(layer, object->transform, material, shape.get()));
+}
