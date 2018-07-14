@@ -3,10 +3,46 @@
 #include <cassert>
 #include <string>
 #include <memory>
+
 #include "util/types.h"
 #include "util/state.h"
 #include "game_object.h"
 
+
+namespace
+{
+    struct SpawningObject
+    {
+    private:
+        std::vector<std::shared_ptr<GameObject>> &objectsRef;
+        std::shared_ptr<GameObject> spawningObject;
+        bool success;
+
+    private:
+        SpawningObject(std::vector<std::shared_ptr<GameObject>> & objects)
+            : objectsRef(objects)
+            , spawningObject(std::make_shared<GameObject>())
+            , success(false)
+        { }
+
+    public:
+        template <typename Ct, typename... Pts>
+        SpawningObject & with(Pts... params)
+        {
+            success &= spawningObject->AddComponent(new Ct(params...));
+            return *this;
+        }
+
+        std::shared_ptr<GameObject> Spawn()
+        {
+            objectsRef.push_back(spawningObject);
+            assert(success);
+            return spawningObject;
+        }
+
+        friend class Scene;
+    };
+}
 
 class Scene: public State
 {
@@ -48,15 +84,8 @@ public:
 
 
 public:
-    template <typename... Ct>
-    std::shared_ptr<GameObject> SpawnObject()
+    SpawningObject MakeObject()
     {
-        auto obj = std::make_shared<GameObject>();
-
-        bool res = ((obj->AddComponent(new Ct)) & ... & 1);
-        assert(res);
-
-        objects.push_back(obj);
-        return obj;
+        return SpawningObject(objects);
     }
 };

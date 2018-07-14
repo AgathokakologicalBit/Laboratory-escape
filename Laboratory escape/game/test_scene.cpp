@@ -17,7 +17,7 @@ class PlayerComponent final: public Behavior
 
 void TestScene::Start()
 {
-    auto player = SpawnObject<PlayerComponent, Collider, SpriteRenderer>();
+    auto player = MakeObject().with<PlayerComponent>().with<Collider>().with<SpriteRenderer>().Spawn();
     player->GetComponent<SpriteRenderer>()->material.SetTexture("player");
 
     for (int x = 1; x < 8; ++x)
@@ -26,7 +26,7 @@ void TestScene::Start()
         {
             auto p = 3 * (1 + (y == 0) - (y == 3)) + (1 - (x == 1) + (x == 7));
 
-            auto stone = SpawnObject<Collider, SpriteRenderer>();
+            auto stone = MakeObject().with<Collider>().with<SpriteRenderer>().Spawn();
             stone->GetComponent<SpriteRenderer>()->material.SetTexture("dungeon_tileset", "ground_" + std::to_string(p));
 
             stone->transform.scale *= 2.f;
