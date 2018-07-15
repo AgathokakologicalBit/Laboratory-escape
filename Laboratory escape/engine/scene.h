@@ -22,7 +22,7 @@ namespace
         SpawningObject(std::vector<std::shared_ptr<GameObject>> & objects)
             : objectsRef(objects)
             , spawningObject(std::make_shared<GameObject>())
-            , success(false)
+            , success(true)
         { }
 
     public:
